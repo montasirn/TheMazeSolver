@@ -10,10 +10,7 @@ public class Main {
 
         search.searchPath(0,0);
 
-
-        int[][] pathFound = search.findPath();
-
-        System.out.println(Arrays.deepToString(pathFound));
+        System.out.println(Arrays.deepToString(search.findPath()));
 
     }
 }
