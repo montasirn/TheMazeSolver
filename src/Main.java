@@ -6,9 +6,12 @@ public class Main {
 
         List<Integer> path = new ArrayList<>();
 
-        DepthFirst.searchPath(maze,0,0,path);
+        DepthFirst search = new DepthFirst(maze,0,0,path);
 
-        int[][] pathFound = DepthFirst.findPath(path);
+        search.searchPath();
+
+
+        int[][] pathFound = search.findPath();
 
         System.out.println(Arrays.deepToString(pathFound));
 
