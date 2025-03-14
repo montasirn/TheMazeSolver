@@ -4,31 +4,28 @@ import java.util.Objects;
 public class DepthFirst {
 
     private final String[][] maze;
-    private final int x;
-    private final int y;
     private final List<Integer> path;
 
     /**
      *  Initializes the values for methods in the class
+     *
      * @param maze 2d array of strings where "." is traversable and "#" is not
-     * @param x starting x coordinate to traverse from
-     * @param y starting y coordinate to traverse from
      * @param path empty List that will contain the path taken from start to end in reverse order
      */
-    public DepthFirst(String[][] maze, int x, int y, List<Integer> path){
+    public DepthFirst(String[][] maze, List<Integer> path){
         this.maze = maze;
-        this.x = x;
-        this.y = y;
         this.path = path;
     }
 
     /**
      * Recursively traverse the 2d array of strings looking for the endpoint, always the bottom right corner
      *
+     * @param x starting x coordinate to traverse from
+     * @param y starting y coordinate to traverse from
      * @return true if the end point of the maze (bottom left corner) is reached, returns false otherwise
      */
 
-    public boolean searchPath(){
+    public boolean searchPath(int x, int y){
 
         // Specifies the endpoint as the bottom right corner of the maze
         int[] endPoint = new int[]{maze.length -1, maze[maze.length - 1].length -1};
@@ -50,16 +47,16 @@ public class DepthFirst {
             maze[x][y] = "+";
 
             // Checks left
-            if (checkLeft()) return true;
+            if (checkLeft(x, y)) return true;
 
             // Checks right
-            if (checkRight()) return true;
+            if (checkRight(x, y)) return true;
 
             // Checks down
-            if (checkDown()) return true;
+            if (checkDown(x, y)) return true;
 
             // Checks up
-            if (checkUp()) return true;
+            if (checkUp(x, y)) return true;
 
         }
 
@@ -70,13 +67,15 @@ public class DepthFirst {
      * Checks to the left of the most recently traversed index, calls on the searchPath method inside the
      * searchPath method, recursively searching
      *
+     * @param x starting x coordinate to traverse from
+     * @param y starting y coordinate to traverse from
      * @return true if the endpoint is found
      */
-    public boolean checkLeft(){
+    public boolean checkLeft(int x, int y){
         int dx = -1;
         int dy = 0;
 
-        if (searchPath()){
+        if (searchPath(x + dx, y + dy)){
             path.add(x);
             path.add(y);
             return true;
@@ -88,13 +87,15 @@ public class DepthFirst {
      * Checks to the right of the most recently traversed index, calls on the searchPath method inside the
      * searchPath method, recursively searching
      *
+     * @param x starting x coordinate to traverse from
+     * @param y starting y coordinate to traverse from
      * @return true if the endpoint is found
      */
-    public boolean checkRight(){
+    public boolean checkRight(int x, int y){
         int dx = 1;
         int dy = 0;
 
-        if (searchPath()){
+        if (searchPath(x + dx, y + dy)){
             path.add(x);
             path.add(y);
             return true;
@@ -107,13 +108,15 @@ public class DepthFirst {
      * Checks underneath the most recently traversed index, calls on the searchPath method inside the
      * searchPath method, recursively searching
      *
+     * @param x starting x coordinate to traverse from
+     * @param y starting y coordinate to traverse from
      * @return true if the endpoint is found
      */
-    public boolean checkDown(){
+    public boolean checkDown(int x, int y){
         int dx = 0;
         int dy = -1;
 
-        if (searchPath()){
+        if (searchPath(x + dx, y + dy)){
             path.add(x);
             path.add(y);
             return true;
@@ -126,13 +129,15 @@ public class DepthFirst {
      * Checks above the most recently traversed index, calls on the searchPath method inside the
      * searchPath method, recursively searching
      *
+     * @param x starting x coordinate to traverse from
+     * @param y starting y coordinate to traverse from
      * @return true if the endpoint is found
      */
-    public boolean checkUp(){
+    public boolean checkUp(int x, int y){
         int dx = 0;
         int dy = 1;
 
-        if (searchPath()){
+        if (searchPath(x + dx, y + dy)){
             path.add(x);
             path.add(y);
             return true;

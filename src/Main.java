@@ -6,9 +6,9 @@ public class Main {
 
         List<Integer> path = new ArrayList<>();
 
-        DepthFirst search = new DepthFirst(maze,0,0,path);
+        DepthFirst search = new DepthFirst(maze,path);
 
-        search.searchPath();
+        search.searchPath(0,0);
 
 
         int[][] pathFound = search.findPath();
